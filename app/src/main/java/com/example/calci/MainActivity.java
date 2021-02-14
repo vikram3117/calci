@@ -136,7 +136,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 op.add(exp);break;
             default:
                 exp=getstr(exp,v);
+
         }
+        int c=0;
         text.setText(exp);
 
     }
