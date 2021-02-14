@@ -182,15 +182,15 @@
         android:layout_weight="1"
         android:weightSum="4">
 
+
         <Button
             android:textSize="@dimen/mid"
             android:onClick="onClick"
-            android:id="@+id/Change"
+            android:id="@+id/ans"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="ok" />
-
+            android:text="ans" />
         <Button
             android:textSize="@dimen/mid"
             android:onClick="onClick"

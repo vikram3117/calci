@@ -7,15 +7,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     TextView text;
     String exp="";
+    ArrayList<String> op=new ArrayList<String>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         text=findViewById(R.id.input);
-        text.setText("123");
     }
 
     public String getstr(String exp,View v)
@@ -117,15 +120,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }.parse();
     }
+    double ans=0;
     @Override
     public void onClick(View v) {
         exp=text.getText().toString();
         switch(v.getId())
         {
+            case R.id.ans: exp=ans+"";break;
             case R.id.clearall: exp="";break;
             case R.id.clear: if(exp.equals("Infinity")||exp.equals("NaN")) exp="";
                 else if(exp.length()>0)exp=exp.substring(0,exp.length()-1);break;
-            case R.id.equal: exp=(exp.length()==0?0:eval(exp))+"";break;
+            case R.id.equal:
+                op.add(exp);
+                exp=(exp.length()==0?0:(ans=eval(exp)))+"";
+                op.add(exp);break;
             default:
                 exp=getstr(exp,v);
         }
