@@ -123,7 +123,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch(v.getId())
         {
             case R.id.clearall: exp="";break;
-            case R.id.clear: if(exp.length()>0)exp=exp.substring(0,exp.length()-1);break;
+            case R.id.clear: if(exp.equals("Infinity")||exp.equals("NaN")) exp="";
+                else if(exp.length()>0)exp=exp.substring(0,exp.length()-1);break;
             case R.id.equal: exp=(exp.length()==0?0:eval(exp))+"";break;
             default:
                 exp=getstr(exp,v);
