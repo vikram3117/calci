@@ -138,7 +138,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 exp=getstr(exp,v);
 
         }
-        int c=0;
         text.setText(exp);
 
     }
