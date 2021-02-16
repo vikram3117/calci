@@ -1,10 +1,14 @@
 package com.example.calci;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -13,12 +17,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView text;
     String exp="";
     ArrayList<String> op=new ArrayList<String>();
-
+    ListView lv;
+    ArrayAdapter<String> ad;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         text=findViewById(R.id.input);
+        lv=findViewById(R.id.lview);
+        ad=new ArrayAdapter<String>(MainActivity.this,R.layout.listlayout,R.id.history,op);
+        lv.setAdapter(ad);
     }
 
     public String getstr(String exp,View v)
@@ -131,9 +139,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.clear: if(exp.equals("Infinity")||exp.equals("NaN")) exp="";
                 else if(exp.length()>0)exp=exp.substring(0,exp.length()-1);break;
             case R.id.equal:
-                op.add(exp);
+
+                if(exp.charAt(exp.length()-1)=='+'||exp.charAt(exp.length()-1)=='-'||exp.charAt(exp.length()-1)=='X'||exp.charAt(exp.length()-1)=='/'||exp.charAt(exp.length()-1)=='%')
+                    break;
+                op.add(exp+"  ");
                 exp=(exp.length()==0?0:(ans=eval(exp)))+"";
-                op.add(exp);break;
+                op.add("="+exp+"  " );
+                ad.notifyDataSetChanged();break;
             default:
                 exp=getstr(exp,v);
 
